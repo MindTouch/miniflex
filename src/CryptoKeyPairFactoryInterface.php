@@ -18,8 +18,5 @@ namespace modethirteen\Crypto;
 
 interface CryptoKeyPairFactoryInterface {
 
-    /**
-     * @return CryptoKeyPair
-     */
     public function newCryptoKeyPair() : CryptoKeyPair;
 }

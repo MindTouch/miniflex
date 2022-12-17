@@ -21,29 +21,12 @@ use modethirteen\Crypto\Exception\CryptoKeySignerException;
 class X509CertificateSigner implements SignerInterface {
 
     /**
-     * @var string
-     */
-    private $algo;
-
-    /**
-     * @var CryptoKeyInterface
-     */
-    private $privateKey;
-
-    /**
-     * @var X509CertificateBuilder
-     */
-    private $x509;
-
-    /**
      * @param CryptoKeyInterface $privateKey - RSA private signing key
      * @param X509CertificateBuilder $x509 - certificate distinguished names builder
      * @param string $algo - digest algorithm
      */
-    public function __construct(CryptoKeyInterface $privateKey, X509CertificateBuilder $x509, string $algo = CryptoKey::DIGEST_ALGORITHM) {
-        $this->privateKey = $privateKey;
-        $this->x509 = $x509;
-        $this->algo = $algo;
+    public function __construct(private CryptoKeyInterface $privateKey, private X509CertificateBuilder $x509, private string $algo = CryptoKey::DIGEST_ALGORITHM)
+    {
     }
 
     /**

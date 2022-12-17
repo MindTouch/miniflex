@@ -74,9 +74,7 @@ TEXT;
         if(!is_array($results)) {
             static::fail('Cannot verify signed message');
         }
-        $fingerprints = array_map(function(array $result) {
-            return isset($result['fingerprint']) ? $result['fingerprint'] : null;
-        }, $results);
+        $fingerprints = array_map(fn(array $result) => $result['fingerprint'] ?? null, $results);
         $fingerprints = array_filter($fingerprints, 'strlen');
         if(!in_array($pair->getPublicKey()->getFingerprint(), $fingerprints)) {
             static::fail('Cannot find PGP public key fingerprint in message signature');

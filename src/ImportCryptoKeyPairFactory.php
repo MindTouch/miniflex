@@ -23,10 +23,7 @@ use modethirteen\Crypto\Exception\CryptoKeyFactoryMissingFormatException;
 
 class ImportCryptoKeyPairFactory implements CryptoKeyPairFactoryInterface {
 
-    /**
-     * @var string
-     */
-    private $algo = CryptoKey::DIGEST_ALGORITHM;
+    private string $algo = CryptoKey::DIGEST_ALGORITHM;
 
     /**
      * @var Closure
@@ -34,22 +31,10 @@ class ImportCryptoKeyPairFactory implements CryptoKeyPairFactoryInterface {
     private $formatHandler;
 
     /**
-     * @var string
-     */
-    private $privateKeyText;
-
-    /**
-     * @var string
-     */
-    private $publicKeyText;
-
-    /**
      * @param string $privateKeyText - PEM private key block
      * @param string $publicKeyText - PEM public key block
      */
-    public function __construct(string $privateKeyText, string $publicKeyText) {
-        $this->privateKeyText = $privateKeyText;
-        $this->publicKeyText = $publicKeyText;
+    public function __construct(private string $privateKeyText, private string $publicKeyText) {
         $this->formatHandler = function(string $text) {
             throw new CryptoKeyFactoryMissingFormatException($text);
         };

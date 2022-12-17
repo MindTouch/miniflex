@@ -24,9 +24,6 @@ use modethirteen\Crypto\Tests\AbstractCryptoTestCase;
 
 class newCryptoKey_Test extends AbstractCryptoTestCase {
 
-    /**
-     * @return array
-     */
     public static function text_format_algo_expectedFormat_expectedFingerprint_expectedExpiration_expectedName_Provider() : array {
         return [
             'RSA PKCS #1 private key' => [
@@ -143,7 +140,7 @@ class newCryptoKey_Test extends AbstractCryptoTestCase {
                 null,
                 CryptoKey::FORMAT_CERTIFICATE,
                 '6c45f005b55637699ddce74371d57908e08bcecdc3c910d5d7817ee9c8b33546',
-                1612841998,
+                1_612_841_998,
                 '_C=CA_ST=xyzzy_L=plugh_O=foo_OU=bar_CN=baz_emailAddress=qux@example.com'
             ],
             'x.509 certificate without header' => [
@@ -152,7 +149,7 @@ class newCryptoKey_Test extends AbstractCryptoTestCase {
                 null,
                 CryptoKey::FORMAT_CERTIFICATE,
                 '6c45f005b55637699ddce74371d57908e08bcecdc3c910d5d7817ee9c8b33546',
-                1612841998,
+                1_612_841_998,
                 '_C=CA_ST=xyzzy_L=plugh_O=foo_OU=bar_CN=baz_emailAddress=qux@example.com'
             ],
             'x.509 certificate with sha512 digest algorithm' => [
@@ -161,7 +158,7 @@ class newCryptoKey_Test extends AbstractCryptoTestCase {
                 'sha512',
                 CryptoKey::FORMAT_CERTIFICATE,
                 '2e7450f6409b6c9551a79fe682279d9658de8e736c7d3aa2f9ad1765b907607e943e244280f1d0a9e1db56f5ffefba74fbd76526585fd126f6e932c308be8367',
-                1612841998,
+                1_612_841_998,
                 '_C=CA_ST=xyzzy_L=plugh_O=foo_OU=bar_CN=baz_emailAddress=qux@example.com'
             ]
         ];
@@ -170,13 +167,6 @@ class newCryptoKey_Test extends AbstractCryptoTestCase {
     /**
      * @dataProvider text_format_algo_expectedFormat_expectedFingerprint_expectedExpiration_expectedName_Provider
      * @test
-     * @param string $text
-     * @param string|null $format
-     * @param string|null $algo
-     * @param string $expectedFormat
-     * @param string|null $expectedFingerprint
-     * @param string|null $expectedExpiration
-     * @param string|null $expectedName
      * @throws CryptoKeyCannotParseCryptoKeyTextException
      * @throws CryptoKeyFactoryCannotConstructCryptoKeyException
      */
@@ -193,9 +183,7 @@ class newCryptoKey_Test extends AbstractCryptoTestCase {
         // arrange
         $factory = new ImportCryptoKeyFactory($text);
         if($format !== null) {
-            $factory = $factory->withFormatHandler(function() use ($format) : string {
-                return $format;
-            });
+            $factory = $factory->withFormatHandler(fn(): string => $format);
         }
         if($algo !== null) {
             $factory = $factory->withDigestAlgorithm($algo);

@@ -20,9 +20,6 @@ use PHPUnit\Framework\TestCase;
 
 abstract class AbstractCryptoTestCase extends TestCase {
 
-    /**
-     * @return string
-     */
     protected static function getPgpPrivateKeyText() : string {
         return <<<TEXT
 -----BEGIN PGP PRIVATE KEY BLOCK-----
@@ -85,9 +82,6 @@ jAiXSg18Kt6n86nWIMcKGGi444MyACNA3Aqj
 TEXT;
     }
 
-    /**
-     * @return string
-     */
     protected static function getPgpPublicKeyText() : string {
         return <<<TEXT
 -----BEGIN PGP PUBLIC KEY BLOCK-----
@@ -123,9 +117,6 @@ Kt6n86nWIMcKGGi444MyACNA3Aqj
 TEXT;
     }
 
-    /**
-     * @return string
-     */
     protected static function getRsaPkcs1PrivateKeyText() : string {
         return <<<TEXT
 -----BEGIN RSA PRIVATE KEY-----
@@ -158,9 +149,6 @@ Pujp5GyUREc4Za27lnpDvf4Fe5IUgw/YY7vgbbr47IZl7oFkHhQ=
 TEXT;
     }
 
-    /**
-     * @return string
-     */
     protected static function getRsaPkcs1PublicKeyText() : string {
         return <<<TEXT
 -----BEGIN RSA PUBLIC KEY-----
@@ -175,9 +163,6 @@ TEXT;
 
     }
 
-    /**
-     * @return string
-     */
     protected static function getRsaPkcs8PrivateKeyText() : string {
         return <<<TEXT
 -----BEGIN PRIVATE KEY-----
@@ -235,9 +220,6 @@ tPlHkivcg04WSgKlb4/QgkGmoji37Q==
 TEXT;
     }
 
-    /**
-     * @return string
-     */
     protected static function getRsaPkcs8PublicKeyText() : string {
         return <<<TEXT
 -----BEGIN PUBLIC KEY-----
@@ -257,9 +239,6 @@ P0H7G/P8THN5qTFESKWEk/ECAwEAAQ==
 TEXT;
     }
 
-    /**
-     * @return string
-     */
     protected static function getX509CertificateKeyText() : string {
         return <<<TEXT
 -----BEGIN CERTIFICATE-----
@@ -286,9 +265,6 @@ W097FK9+N62/k3tX5TA=
 TEXT;
     }
 
-    /**
-     * @return string
-     */
     protected static function getX509CertificateSigningPrivateKeyText() : string {
         return <<<TEXT
 -----BEGIN PRIVATE KEY-----

@@ -23,22 +23,11 @@ use modethirteen\TypeEx\StringEx;
 class PgpMessageSigner implements SignerInterface {
 
     /**
-     * @var CryptoKeyInterface
-     */
-    private $key;
-
-    /**
-     * @var string
-     */
-    private $message;
-
-    /**
      * @param CryptoKeyInterface $key - PGP private key
      * @param string $message - message to sign
      */
-    public function __construct(CryptoKeyInterface $key, string $message) {
-        $this->key = $key;
-        $this->message = $message;
+    public function __construct(private CryptoKeyInterface $key, private string $message)
+    {
     }
 
     /**

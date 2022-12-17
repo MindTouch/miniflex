@@ -22,25 +22,16 @@ use modethirteen\Crypto\Exception\CryptoKeySignerException;
 
 class X509CertificateBuilder {
 
-    /**
-     * @var string
-     */
-    private $algo = CryptoKey::DIGEST_ALGORITHM;
+    private string $algo = CryptoKey::DIGEST_ALGORITHM;
 
     /**
      * @var array<string, string>
      */
-    private $data = [];
+    private array $data = [];
 
-    /**
-     * @var int
-     */
-    private $days = 365;
+    private int $days = 365;
 
-    /**
-     * @var X509CertificateSigner
-     */
-    private $signature;
+    private \modethirteen\Crypto\X509CertificateSigner $signature;
 
     /**
      * @param CryptoKeyInterface $privateKey - RSA private signing key
@@ -49,9 +40,6 @@ class X509CertificateBuilder {
         $this->signature = new X509CertificateSigner($privateKey, $this);
     }
 
-    /**
-     * @return int
-     */
     public function getDays() : int {
         return $this->days;
     }
@@ -64,7 +52,6 @@ class X509CertificateBuilder {
     }
 
     /**
-     * @return CryptoKeyInterface
      * @throws CryptoKeyCannotParseCryptoKeyTextException
      * @throws CryptoKeyFactoryCannotConstructCryptoKeyException
      * @throws CryptoKeySignerException
@@ -76,7 +63,6 @@ class X509CertificateBuilder {
     }
 
     /**
-     * @param int $days
      * @return static
      */
     public function setDays(int $days) : object {
@@ -85,7 +71,6 @@ class X509CertificateBuilder {
     }
 
     /**
-     * @param string $name
      * @return static
      */
     public function setCommonName(string $name) : object {
@@ -94,7 +79,6 @@ class X509CertificateBuilder {
     }
 
     /**
-     * @param string $algo
      * @return static
      */
     public function setDigestAlgorithm(string $algo) : object {
@@ -103,7 +87,6 @@ class X509CertificateBuilder {
     }
 
     /**
-     * @param string $email
      * @return static
      */
     public function setEmailAddress(string $email) : object {
@@ -112,7 +95,6 @@ class X509CertificateBuilder {
     }
 
     /**
-     * @param string $name
      * @return static
      */
     public function setCountryName(string $name) : object {
@@ -121,7 +103,6 @@ class X509CertificateBuilder {
     }
 
     /**
-     * @param string $name
      * @return static
      */
     public function setLocalityName(string $name) : object {
@@ -130,7 +111,6 @@ class X509CertificateBuilder {
     }
 
     /**
-     * @param string $name
      * @return static
      */
     public function setOrganizationName(string $name) : object {
@@ -139,7 +119,6 @@ class X509CertificateBuilder {
     }
 
     /**
-     * @param string $name
      * @return static
      */
     public function setOrganizationalUnitName(string $name) : object {
@@ -148,7 +127,6 @@ class X509CertificateBuilder {
     }
 
     /**
-     * @param string $name
      * @return static
      */
     public function setStateOrProvinceName(string $name) : object {

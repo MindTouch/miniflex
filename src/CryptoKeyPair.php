@@ -18,35 +18,14 @@ namespace modethirteen\Crypto;
 
 class CryptoKeyPair {
 
-    /**
-     * @var CryptoKeyInterface
-     */
-    private $privateKey;
-
-    /**
-     * @var CryptoKeyInterface
-     */
-    private $publicKey;
-
-    /**
-     * @param CryptoKeyInterface $privateKey
-     * @param CryptoKeyInterface $publicKey
-     */
-    public function __construct(CryptoKeyInterface $privateKey, CryptoKeyInterface $publicKey) {
-        $this->privateKey = $privateKey;
-        $this->publicKey = $publicKey;
+    public function __construct(private CryptoKeyInterface $privateKey, private CryptoKeyInterface $publicKey)
+    {
     }
 
-    /**
-     * @return CryptoKeyInterface
-     */
     public function getPrivateKey() : CryptoKeyInterface {
         return $this->privateKey;
     }
 
-    /**
-     * @return CryptoKeyInterface
-     */
     public function getPublicKey() : CryptoKeyInterface {
         return $this->publicKey;
     }

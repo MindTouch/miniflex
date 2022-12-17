@@ -21,15 +21,9 @@ use modethirteen\Crypto\Exception\CryptoKeyFactoryCannotConstructCryptoKeyExcept
 
 class RsaPkcs8CryptoKeyPairFactory implements CryptoKeyPairFactoryInterface {
 
-    /**
-     * @var string
-     */
-    private $algo = CryptoKey::DIGEST_ALGORITHM;
+    private string $algo = CryptoKey::DIGEST_ALGORITHM;
 
-    /**
-     * @var int
-     */
-    private $bits = 4096;
+    private int $bits = 4096;
 
     /**
      * {@inheritDoc}
@@ -56,7 +50,7 @@ class RsaPkcs8CryptoKeyPairFactory implements CryptoKeyPairFactoryInterface {
         if($publicKeyData === false) {
             throw new CryptoKeyFactoryCannotConstructCryptoKeyException('failed to extract public key: ' . openssl_error_string());
         }
-        return (new ImportCryptoKeyPairFactory($privateKeyText, isset($publicKeyData['key']) ? $publicKeyData['key'] : ''))
+        return (new ImportCryptoKeyPairFactory($privateKeyText, $publicKeyData['key'] ?? ''))
             ->withDigestAlgorithm($this->algo)
             ->newCryptoKeyPair();
     }

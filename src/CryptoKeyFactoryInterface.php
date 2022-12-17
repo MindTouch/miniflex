@@ -18,8 +18,5 @@ namespace modethirteen\Crypto;
 
 interface CryptoKeyFactoryInterface {
 
-    /**
-     * @return CryptoKeyInterface
-     */
     public function newCryptoKey() : CryptoKeyInterface;
 }

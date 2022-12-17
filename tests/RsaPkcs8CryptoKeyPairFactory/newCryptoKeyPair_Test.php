@@ -23,9 +23,6 @@ use modethirteen\Crypto\Tests\AbstractCryptoTestCase;
 
 class newCryptoKeyPair_Test extends AbstractCryptoTestCase {
 
-    /**
-     * @return array
-     */
     public static function bits_algo_Provider() : array {
         return [
             [null, null],
@@ -39,8 +36,6 @@ class newCryptoKeyPair_Test extends AbstractCryptoTestCase {
     /**
      * @dataProvider bits_algo_Provider
      * @test
-     * @param int|null $bits
-     * @param string|null $algo
      * @throws CryptoKeyCannotParseCryptoKeyTextException
      * @throws CryptoKeyFactoryCannotConstructCryptoKeyException
      */

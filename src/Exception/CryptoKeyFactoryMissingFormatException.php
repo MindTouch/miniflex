@@ -19,16 +19,10 @@ namespace modethirteen\Crypto\Exception;
 class CryptoKeyFactoryMissingFormatException extends CryptoKeyFactoryCannotConstructCryptoKeyException {
 
     /**
-     * @var string
-     */
-    private $text;
-
-    /**
      * @param string $text - PEM key block
      */
-    public function __construct(string $text) {
+    public function __construct(private string $text) {
         parent::__construct('cannot infer format from PEM key block headers');
-        $this->text = $text;
     }
 
     public function getText() : string {

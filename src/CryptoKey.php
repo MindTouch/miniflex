@@ -20,20 +20,20 @@ use Closure;
 use modethirteen\Crypto\Exception\CryptoKeyCannotParseCryptoKeyTextException;
 use modethirteen\TypeEx\StringEx;
 
-class CryptoKey implements CryptoKeyInterface {
-    const DIGEST_ALGORITHM = 'sha256';
-    const FORMAT_CERTIFICATE = 'CERTIFICATE';
-    const FORMAT_PGP_PRIVATE_KEY_BLOCK = 'PGP PRIVATE KEY BLOCK';
-    const FORMAT_PGP_PUBLIC_KEY_BLOCK = 'PGP PUBLIC KEY BLOCK';
-    const FORMAT_PRIVATE_KEY = 'PRIVATE KEY';
-    const FORMAT_PUBLIC_KEY = 'PUBLIC KEY';
-    const FORMAT_RSA_PRIVATE_KEY = 'RSA PRIVATE KEY';
-    const FORMAT_RSA_PUBLIC_KEY = 'RSA PUBLIC KEY';
+class CryptoKey implements CryptoKeyInterface, \Stringable {
+    public const DIGEST_ALGORITHM = 'sha256';
+    public const FORMAT_CERTIFICATE = 'CERTIFICATE';
+    public const FORMAT_PGP_PRIVATE_KEY_BLOCK = 'PGP PRIVATE KEY BLOCK';
+    public const FORMAT_PGP_PUBLIC_KEY_BLOCK = 'PGP PUBLIC KEY BLOCK';
+    public const FORMAT_PRIVATE_KEY = 'PRIVATE KEY';
+    public const FORMAT_PUBLIC_KEY = 'PUBLIC KEY';
+    public const FORMAT_RSA_PRIVATE_KEY = 'RSA PRIVATE KEY';
+    public const FORMAT_RSA_PUBLIC_KEY = 'RSA PUBLIC KEY';
 
     /**
      * @var string[]
      */
-    private static $supportedFormats = [
+    private static array $supportedFormats = [
         self::FORMAT_CERTIFICATE,
         self::FORMAT_PGP_PRIVATE_KEY_BLOCK,
         self::FORMAT_PGP_PUBLIC_KEY_BLOCK,
@@ -45,7 +45,6 @@ class CryptoKey implements CryptoKeyInterface {
 
     /**
      * @param string $format - PEM key block format (CERTIFICATE, PGP PUBLIC KEY BLOCK, ...)
-     * @return bool
      */
     public static function isSupportedCryptoKeyFormat(string $format) : bool {
         return in_array($format, self::$supportedFormats);
@@ -57,7 +56,6 @@ class CryptoKey implements CryptoKeyInterface {
      *
      * @param string $text - PEM key block with or without headers
      * @param string $format - key block format (CERTIFICATE, PGP PUBLIC KEY BLOCK, ...)
-     * @return string
      */
     public static function pem(string $text, string $format) : string {
         return self::_pem(self::trim($text), $format);
@@ -67,7 +65,6 @@ class CryptoKey implements CryptoKeyInterface {
      * Remove PEM headers and whitespace
      *
      * @param string $text - PEM key block
-     * @return string
      */
     public static function trim(string $text) : string {
         $text = str_replace(["\x0D", "\r", "\n"], '', $text);
@@ -83,7 +80,6 @@ class CryptoKey implements CryptoKeyInterface {
      *
      * @param string $text - PEM key block without headers
      * @param string $format - PEM key block format (CERTIFICATE, PGP PUBLIC KEY BLOCK, ...)
-     * @return string
      */
     private static function _pem(string $text, string $format) : string {
 
@@ -91,35 +87,20 @@ class CryptoKey implements CryptoKeyInterface {
         return "-----BEGIN {$format}-----\n" . chunk_split($text, 64, "\n") . "-----END {$format}-----\n";
     }
 
-    /**
-     * @var int|null
-     */
-    private $expiration = null;
+    private ?int $expiration = null;
 
-    /**
-     * @var string|null
-     */
-    private $fingerprint = null;
+    private ?string $fingerprint = null;
 
     /**
      * @var string
      */
     private $format;
 
-    /**
-     * @var string
-     */
-    private $pem;
+    private string $pem;
 
-    /**
-     * @var string|null
-     */
-    private $name = null;
+    private ?string $name = null;
 
-    /**
-     * @var string
-     */
-    private $text;
+    private string $text;
 
     /**
      * @param string $text - PEM key block
@@ -128,7 +109,7 @@ class CryptoKey implements CryptoKeyInterface {
      */
     public function __construct(string $text, Closure $formatHandler) {
         if(preg_match('/-----BEGIN (.+?)-----/', $text, $matches)) {
-            $this->format = isset($matches[1]) ? $matches[1] : null;
+            $this->format = $matches[1] ?? null;
         } else {
             $this->format = $formatHandler($text);
         }
@@ -172,7 +153,6 @@ class CryptoKey implements CryptoKeyInterface {
     }
 
     /**
-     * @param int $expiration
      * @return static
      */
     public function withExpiration(int $expiration) : object {
@@ -182,7 +162,6 @@ class CryptoKey implements CryptoKeyInterface {
     }
 
     /**
-     * @param string $fingerprint
      * @return static
      */
     public function withFingerprint(string $fingerprint) : object {
@@ -192,7 +171,6 @@ class CryptoKey implements CryptoKeyInterface {
     }
 
     /**
-     * @param string $name
      * @return static
      */
     public function withName(string $name) : object {

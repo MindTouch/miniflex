@@ -21,23 +21,10 @@ use modethirteen\Crypto\CryptoKeyInterface;
 
 class CryptoKeySignerException extends Exception {
 
-    /**
-     * @var CryptoKeyInterface
-     */
-    private $key;
-
-    /**
-     * @param CryptoKeyInterface $key
-     * @param string $error
-     */
-    public function __construct(CryptoKeyInterface $key, string $error) {
+    public function __construct(private CryptoKeyInterface $key, string $error) {
         parent::__construct($error);
-        $this->key = $key;
     }
 
-    /**
-     * @return CryptoKeyInterface
-     */
     public function getCryptoKey() : CryptoKeyInterface {
         return $this->key;
     }

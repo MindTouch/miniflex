@@ -20,36 +20,20 @@ use Exception;
 
 class CryptoKeyCannotParseCryptoKeyTextException extends Exception {
 
-    /**
-     * @var string
-     */
-    private $error;
-
-    /**
-     * @var string
-     */
-    private $text;
+    private string $error;
 
     /**
      * @param string $error - the specific error or reason the key pair cannot be instantiated
-     * @param string $text
      */
-    public function __construct(string $error, string $text) {
+    public function __construct(string $error, private string $text) {
         parent::__construct("Cannot parse cryptographic key block, {$error}");
         $this->error = $error;
-        $this->text = $text;
     }
 
-    /**
-     * @return string
-     */
     public function getError() : string {
         return $this->error;
     }
 
-    /**
-     * @return string
-     */
     public function getCryptoKeyText() : string {
         return $this->text;
     }

@@ -25,10 +25,7 @@ use modethirteen\TypeEx\StringEx;
 
 class ImportCryptoKeyFactory implements CryptoKeyFactoryInterface {
 
-    /**
-     * @var string
-     */
-    private $algo = CryptoKey::DIGEST_ALGORITHM;
+    private string $algo = CryptoKey::DIGEST_ALGORITHM;
 
     /**
      * @var Closure
@@ -36,15 +33,9 @@ class ImportCryptoKeyFactory implements CryptoKeyFactoryInterface {
     private $formatHandler;
 
     /**
-     * @var string
-     */
-    private $text;
-
-    /**
      * @param string $text - PEM key block
      */
-    public function __construct(string $text) {
-        $this->text = $text;
+    public function __construct(private string $text) {
         $this->formatHandler = function(string $text) {
             throw new CryptoKeyFactoryMissingFormatException($text);
         };
