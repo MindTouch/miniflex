@@ -16,8 +16,8 @@
   "require": {
     "ext-gnupg": "*",
     "ext-openssl": "*",
-    "php": "~8.0.0",
-    "modethirteen/type-ex": "dev-main-php8"
+    "php": "~8.2.0",
+    "modethirteen/type-ex": "dev-main-php82"
   },
   "require-dev": {
     "phpstan/phpstan": "^1.9.3",
